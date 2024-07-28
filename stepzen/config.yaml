@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: postgresql_config
+      uri: postgresql://ep-fancy-lake-a279zzkr.eu-central-1.aws.neon.tech/PostgreSql?user=PostgreSql_owner&password=tTj0bKVGR8dk
