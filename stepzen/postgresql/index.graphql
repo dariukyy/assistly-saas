@@ -56,6 +56,16 @@ The following queries are just a set of examples of how to access your schema.
 Feel free to modify them or aggregate more.
 """
 type Query {
+  chatbotsByUser(clerk_user_id: String!): [Chatbots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT * FROM chatbots WHERE clerk_user_id = $1
+      """
+      configuration: "postgresql_config"
+    )
+
   " Queries for type 'Chat_sessions' "
   chat_sessions(id: Int!): Chat_sessions
     @dbquery(
@@ -180,6 +190,7 @@ type Query {
       """
       configuration: "postgresql_config"
     )
+
   chatbotsUsingChatbot_characteristics_chatbot_id_fkey(
     chatbot_id: Int!
   ): Chatbots
@@ -191,6 +202,7 @@ type Query {
       """
       configuration: "postgresql_config"
     )
+
   " Queries for type 'Guests' "
   guests(id: Int!): Guests
     @dbquery(
