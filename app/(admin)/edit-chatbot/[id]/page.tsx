@@ -108,6 +108,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
 
   async function handleUpdateChatbot(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (chatbotName === data?.chatbots.name) return;
 
     try {
       const promise = updateChatbot({
@@ -187,7 +188,10 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
               onChange={(e) => setChatbotName(e.target.value)}
               className="w-full border-2 border-gray-200 bg-transparent text-xl font-bold"
             />
-            <Button disabled={!chatbotName} type="submit">
+            <Button
+              disabled={!chatbotName || chatbotName === data?.chatbots.name}
+              type="submit"
+            >
               Update
             </Button>
           </form>
