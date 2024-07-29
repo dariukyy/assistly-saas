@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ApolloProviderWrapper from "@/components/ApolloProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
           <body className={`min-h-screen flex ${inter.className}`}>
             {children}
 
-            {/* Toaster */}
+            <Toaster position="bottom-center" />
           </body>
         </html>
       </ClerkProvider>
