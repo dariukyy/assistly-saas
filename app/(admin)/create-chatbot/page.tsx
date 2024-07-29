@@ -19,6 +19,7 @@ function CreateChatbot() {
     {
       variables: {
         clerk_user_id: user?.id,
+        created_at: new Date().toISOString(),
         name,
       },
     }
@@ -36,7 +37,7 @@ function CreateChatbot() {
     }
   }
 
-  if (!user) return;
+  if (!user) return null;
 
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:space-x-10 bg-white p-10 rounded-md m-10">
@@ -59,7 +60,7 @@ function CreateChatbot() {
             placeholder="Chatbot Name..."
             className="max-w-lg "
           />
-          <Button type="submit" disabled={loading || !name}>
+          <Button type="submit" disabled={loading}>
             {loading ? "Creating Chatbot..." : "Create Chatbot"}
           </Button>
         </form>
