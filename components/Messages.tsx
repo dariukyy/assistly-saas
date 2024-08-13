@@ -3,7 +3,7 @@
 import { Message } from "@/types/types";
 import { usePathname } from "next/navigation";
 import Avatar from "./Avatar";
-import { UserCircle } from "lucide-react";
+import { Ellipsis, UserCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useRef } from "react";
@@ -11,14 +11,15 @@ import { useEffect, useRef } from "react";
 function Messages({
   messages,
   chatbotName,
+  loading,
 }: {
   messages: Message[];
   chatbotName: string;
+  loading: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const path = usePathname();
   const isReviewsPage = path.includes("review-sessions");
-
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -59,61 +60,65 @@ function Messages({
                   : "chat-bubble-secondary bg-gray-200 text-zinc-700"
               }`}
             >
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className={`break-words`}
-                components={{
-                  ul: ({ node, ...props }) => (
-                    <ul
-                      {...props}
-                      className="list-disc list-inside ml-5 mb-5"
-                    />
-                  ),
-                  ol: ({ node, ...props }) => (
-                    <ol
-                      {...props}
-                      className="list-decimal list-inside ml-5 mb-5"
-                    />
-                  ),
+              {loading ? (
+                <Ellipsis className="h-10 w-10 animate-pulse" />
+              ) : (
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  className={`break-words`}
+                  components={{
+                    ul: ({ node, ...props }) => (
+                      <ul
+                        {...props}
+                        className="list-disc list-inside ml-5 mb-5"
+                      />
+                    ),
+                    ol: ({ node, ...props }) => (
+                      <ol
+                        {...props}
+                        className="list-decimal list-inside ml-5 mb-5"
+                      />
+                    ),
 
-                  h1: ({ node, ...props }) => (
-                    <h1 {...props} className="text-2xl font-bold mb-5" />
-                  ),
-                  h2: ({ node, ...props }) => (
-                    <h2 {...props} className="text-xl font-bold mb-5" />
-                  ),
-                  h3: ({ node, ...props }) => (
-                    <h3 {...props} className="text-lg font-bold mb-5" />
-                  ),
-                  table: ({ node, ...props }) => (
-                    <table
-                      {...props}
-                      className="table-auto w-full mb-5 border-separate border-2 rounded-sm border-spacing-4 border-white"
-                    />
-                  ),
-                  th: ({ node, ...props }) => (
-                    <th {...props} className="text-left underline" />
-                  ),
-                  p: ({ node, ...props }) => (
-                    <p
-                      {...props}
-                      className={`whitespace-break-spaces mb-5 ${
-                        message.content === "Thinking..." && "animate-pulse"
-                      } ${isSender ? "text-white" : "text-zinc-700"}`}
-                    />
-                  ),
-                  a: ({ node, ...props }) => (
-                    <a
-                      {...props}
-                      className="font-bold underline hover:text-blue-400"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  ),
-                }}
-              >
-                {message.content}
-              </ReactMarkdown>
+                    h1: ({ node, ...props }) => (
+                      <h1 {...props} className="text-2xl font-bold mb-5" />
+                    ),
+                    h2: ({ node, ...props }) => (
+                      <h2 {...props} className="text-xl font-bold mb-5" />
+                    ),
+                    h3: ({ node, ...props }) => (
+                      <h3 {...props} className="text-lg font-bold mb-5" />
+                    ),
+                    table: ({ node, ...props }) => (
+                      <table
+                        {...props}
+                        className="table-auto w-full mb-5 border-separate border-2 rounded-sm border-spacing-4 border-white"
+                      />
+                    ),
+                    th: ({ node, ...props }) => (
+                      <th {...props} className="text-left underline" />
+                    ),
+                    p: ({ node, ...props }) => (
+                      <p
+                        {...props}
+                        className={`whitespace-break-spaces mb-5 ${
+                          message.content === "Thinking..." && "animate-pulse"
+                        } ${isSender ? "text-white" : "text-zinc-700"}`}
+                      />
+                    ),
+                    a: ({ node, ...props }) => (
+                      <a
+                        {...props}
+                        className="font-bold underline hover:text-blue-400"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      />
+                    ),
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              )}
             </p>
           </div>
         );
