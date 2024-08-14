@@ -54,10 +54,10 @@ function ChatBotSessions({ chatbots }: { chatbots: Chatbot[] }) {
                         className="relative p-10 bg-[#2991EE] text-white rounded-md block"
                       >
                         <p className="text-lg font-bold">
-                          {session.guest?.name || "Anonymous"}
+                          {session.guests?.name || "Anonymous"}
                         </p>
                         <p className="text-sm font-light">
-                          {session.guest?.email || "No email provided"}
+                          {session.guests?.email || "No email provided"}
                         </p>
                         <p className="absolute top-5 right-5 text-sm">
                           <ReactTimeago date={new Date(session.created_at)} />
