@@ -15,7 +15,7 @@ function Messages({
 }: {
   messages: Message[];
   chatbotName: string;
-  loading: boolean;
+  loading?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const path = usePathname();
