@@ -26,6 +26,8 @@ async function ReviewSession({ params: { id } }: { params: { id: string } }) {
     query: GET_CHAT_SESSION_MESSAGES,
     variables: { id: parseInt(id) },
   });
+
+  console.log(messages, guestName);
   return (
     <div className="flex-1 p-8 md:p-10 pb-24">
       <h1 className="text-xl lg:text-3xl font-semibold">Session Review</h1>

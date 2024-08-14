@@ -161,7 +161,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
           >
             <span className="sr-only">Copy</span>
             {!copied ? (
-              <Copy className="h-4 w-4" />
+              <Copy className="h-3 w-3" />
             ) : (
               <CheckCheck className="h-4 w-4" />
             )}
