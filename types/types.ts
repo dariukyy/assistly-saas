@@ -27,7 +27,7 @@ export interface ChatSession {
   guest_id: number | null;
   created_at: string;
   messages: Message[];
-  guest: Guest;
+  guests: Guest;
 }
 
 export interface Message {
