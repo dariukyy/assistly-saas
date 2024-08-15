@@ -13,8 +13,7 @@ import {
 import { GET_CHATBOT_BY_ID } from "@/graphql/queries/queries";
 import { GetCHatbotByVariables, GetChatbotByIdResponse } from "@/types/types";
 import { useMutation, useQuery } from "@apollo/client";
-import { create } from "domain";
-import { CheckCheck, CircleX, Copy, X } from "lucide-react";
+import { CheckCheck, Copy } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";

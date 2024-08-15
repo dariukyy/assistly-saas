@@ -168,6 +168,7 @@ function ChatbotPage({ params: { id } }: { params: { id: string } }) {
             : msg
         )
       );
+      setLoading(false);
     } catch (error) {
       console.error("Error sending message", error);
     }

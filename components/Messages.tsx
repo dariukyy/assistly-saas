@@ -61,7 +61,7 @@ function Messages({
               }`}
             >
               {loading ? (
-                <Ellipsis className="h-10 w-10 animate-pulse" />
+                <span className="loading loading-dots loading-xs"></span>
               ) : (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}

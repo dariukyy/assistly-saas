@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       previousMessages.map((message) => ({
         role: message.sender === "ai" ? "system" : "user",
         name: message.sender === "ai" ? "system" : name,
-        content: message.content,
+        content: message.content as string,
       }));
 
     // step 3: Combine characteristics into a system propmt
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
       {
         role: "system",
         name: "system",
-        content: `You are a helpful assistant talking to ${name}, dont welcome guest on every his message. If a generic question is asked which is not relevant or in the same scope or domain as the points in mentioned in the key information section, kindly inform the user theyre only allowed to search for the specified content. use Emoji's where possible. Respond to the user in the same language they use. If the user types a question or statement in their native language, reply in that language. Here is some key information that you need to be aware of, these are elements you may be asked about: ${systemPrompt} `,
+        content: `You are a helpful assistant talking to ${name}, dont welcome guest on every his message. If a generic question is asked which is not relevant or in the same scope or domain as the points in mentioned in the key information section, kindly inform the user theyre only allowed to search for the specified content. use Emoji's where possible. Your main language is English, but Respond to the user in the same language they use. If the user types a question or statement in their native language, reply in that language. Here is some key information that you need to be aware of, these are elements you may be asked about: ${systemPrompt} `,
       },
       ...formattedPreviousMessages,
       {
