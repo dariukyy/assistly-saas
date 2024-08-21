@@ -30,10 +30,24 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const data = result.data;
-    return NextResponse.json({ data, headers: corsHeaders });
+    const response = NextResponse.json(result);
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
+    return response;
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(error, { status: 500 });
+    const response = NextResponse.json({ error: error }, { status: 500 });
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
+    return response;
   }
+}
+
+export async function OPTIONS() {
+  const response = new NextResponse(null, { status: 204 });
+  Object.entries(corsHeaders).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+  return response;
 }
